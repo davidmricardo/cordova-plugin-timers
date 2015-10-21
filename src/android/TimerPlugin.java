@@ -52,6 +52,8 @@ public class TimerPlugin extends CordovaPlugin {
     public boolean execute (final String action, final JSONArray args,
                             final CallbackContext command) throws JSONException {
 
+        Log.v(TAG, "exec");
+
         cordova.getThreadPool().execute(new Runnable() {
         	
             public void run() {
@@ -74,7 +76,7 @@ public class TimerPlugin extends CordovaPlugin {
     }
     
     private int addInterval(int msInterval){
-    	Log.v(TAG, "addIntervall");
+    	Log.v(TAG, "addInterval");
     	return TimerManager.addInterval(msInterval);
     }
     

@@ -54,7 +54,7 @@ public class TimerPlugin extends CordovaPlugin {
 
         Log.v(TAG, "exec");
 
-        cordova.getThreadPool().execute(new Runnable() {
+        /*cordova.getThreadPool().execute(new Runnable() {
         	
             public void run() {
             	
@@ -69,7 +69,7 @@ public class TimerPlugin extends CordovaPlugin {
                 
             }
             
-        });
+        });*/
 
         return true;
         

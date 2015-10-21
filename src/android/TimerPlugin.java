@@ -33,12 +33,14 @@ public class TimerPlugin extends CordovaPlugin {
 
         Log.v(TAG, "exec");
 
-        if (action.equals("addTimeout"))
+        triggerTimer(1);
+
+        /*if (action.equals("addTimeout"))
             command.success(addTimeout(args.optInt(0)));
         else if (action.equals("addInterval"))
             command.success(addInterval(args.optInt(0)));
         else if (action.equals("deleteTimer"))
-            command.success(deleteTimer(args.optInt(0)));
+            command.success(deleteTimer(args.optInt(0)));*/
 
         return true;
         
@@ -60,7 +62,7 @@ public class TimerPlugin extends CordovaPlugin {
     	return result ? "true" : "false";
     }
 
-    static void triggerTimer (int timerId) {
+    private void triggerTimer (int timerId) {
 
         String js = "cordova.plugins.TimerPlugin.triggerTimer(" + timerId + ")";
 

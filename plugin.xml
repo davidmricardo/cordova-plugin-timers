@@ -24,9 +24,9 @@
 
     <!-- js -->
 
-    <js-module src="www/TimerPlugin.js" name="timers">
-        <clobbers target="cordova.plugins.timers" />
-        <clobbers target="plugin.timers" />
+    <js-module src="www/TimerPlugin.js" name="TimerPlugin">
+        <clobbers target="cordova.plugins.TimerPlugin" />
+        <clobbers target="plugin.TimerPlugin" />
     </js-module>
 
 
@@ -54,7 +54,7 @@
                 target-dir="src/de/schcr/cordova/plugin/timers" />
 
         <config-file target="res/xml/config.xml" parent="/*">
-            <feature name="Timers">
+            <feature name="TimerPlugin">
                 <param name="android-package" value="de.schchr.cordova.plugin.timers.TimerPlugin"/>
             </feature>
         </config-file>

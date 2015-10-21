@@ -4,6 +4,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 import org.apache.cordova.CallbackContext;
+import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.PluginResult;
@@ -12,6 +13,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import android.app.Activity;
+import android.util.Log;
 
 public class TimerPlugin extends CordovaPlugin {
 	
@@ -34,9 +36,17 @@ public class TimerPlugin extends CordovaPlugin {
 
     // To inform the user about the state of the app in callbacks
     protected static Boolean isInBackground = true;
+    
+    protected static final String TAG = "timers";
 
     // Queues all events before deviceready
     private static ArrayList<String> eventQueue = new ArrayList<String>();
+    
+    @Override
+    public void initialize (CordovaInterface cordova, CordovaWebView webView) {
+        TimerPlugin.webView = super.webView;
+        Log.v(TAG, "init");
+    }
     
     @Override
     public boolean execute (final String action, final JSONArray args,
@@ -64,14 +74,17 @@ public class TimerPlugin extends CordovaPlugin {
     }
     
     private int addInterval(int msInterval){
+    	Log.v(TAG, "addIntervall");
     	return TimerManager.addInterval(msInterval);
     }
     
     private int addTimeout(int msTimeout){
+    	Log.v(TAG, "addTimeout");
     	return TimerManager.addTimeout(msTimeout);
     }
     
     private String deleteTimer(int timerId){
+    	Log.v(TAG, "deleteTimer");
     	boolean result = TimerManager.deleteTimer(timerId);
     	return result ? "true" : "false";
     }

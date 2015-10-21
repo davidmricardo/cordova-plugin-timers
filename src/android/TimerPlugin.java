@@ -62,7 +62,7 @@ public class TimerPlugin extends CordovaPlugin {
     	return result ? "true" : "false";
     }
 
-    private void triggerTimer (int timerId) {
+    public void triggerTimer (int timerId) {
 
         String js = "cordova.plugins.TimerPlugin.triggerTimer(" + timerId + ")";
 

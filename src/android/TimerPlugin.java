@@ -61,12 +61,8 @@ public class TimerPlugin extends CordovaPlugin {
     }
 
     static void triggerTimer (int timerId) {
-    	
-        String state = getApplicationState();
-        String params = "\"" + state + "\"";
 
-        String js = "cordova.plugins.TimerPlugin.triggerTimer(" +
-                "\"" + timerId + "\"," + params + ")";
+        String js = "cordova.plugins.TimerPlugin.triggerTimer(" + timerId + ")";
 
         webView.loadUrl("javascript:" + js);
         

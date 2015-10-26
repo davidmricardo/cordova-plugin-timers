@@ -1,18 +1,12 @@
 package de.schchr.cordova.plugin.timers;
 
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CordovaWebView;
-import org.apache.cordova.PluginResult;
-import org.apache.cordova.PluginResult.Status;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import android.app.Activity;
 import android.util.Log;
 
 public class TimerPlugin extends CordovaPlugin {
@@ -20,6 +14,7 @@ public class TimerPlugin extends CordovaPlugin {
     private static CordovaWebView webView = null;
 
     protected static final String TAG = "timers";
+    //adb logcat -s timers
     
     @Override
     public void initialize (CordovaInterface cordova, CordovaWebView webView) {
@@ -33,7 +28,7 @@ public class TimerPlugin extends CordovaPlugin {
 
         Log.v(TAG, "exec");
 
-        triggerTimer(1);
+        //triggerTimer(1);
 
         /*if (action.equals("addTimeout"))
             command.success(addTimeout(args.optInt(0)));

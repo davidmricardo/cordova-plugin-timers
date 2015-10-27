@@ -15,6 +15,7 @@ public class TimerPlugin extends CordovaPlugin {
 
     protected static final String TAG = "timers";
     //adb logcat -s timers
+    //
     
     @Override
     public void initialize (CordovaInterface cordova, CordovaWebView webView) {
@@ -27,15 +28,19 @@ public class TimerPlugin extends CordovaPlugin {
                             final CallbackContext command) throws JSONException {
 
         Log.v(TAG, "exec");
-
-        //triggerTimer(1);
-
-        /*if (action.equals("addTimeout"))
-            command.success(addTimeout(args.optInt(0)));
-        else if (action.equals("addInterval"))
-            command.success(addInterval(args.optInt(0)));
-        else if (action.equals("deleteTimer"))
-            command.success(deleteTimer(args.optInt(0)));*/
+    	
+        try{
+        	
+        	if (action.equals("addTimeout"))
+                command.success(addTimeout(args.optInt(0)));
+            else if (action.equals("addInterval"))
+                command.success(addInterval(args.optInt(0)));
+            else if (action.equals("deleteTimer"))
+                command.success(deleteTimer(args.optInt(0)));
+        	
+        } catch (Exception e){
+        	System.out.println(e);
+        }
 
         return true;
         

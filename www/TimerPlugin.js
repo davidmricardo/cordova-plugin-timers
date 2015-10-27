@@ -12,7 +12,7 @@ var callbacks = {};
 
 var TimerPlugin =
 {greet: function (name, successCallback, errorCallback) {
-    cordova.exec(successCallback, errorCallback, "Hello", "greet", [name]);
+    cordova.exec(successCallback, errorCallback, "TimerPlugin", "greet", [name]);
 }};
    /* addInterval: function(msInterval, callback, success, error){
         exec(function(id){

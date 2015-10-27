@@ -31,7 +31,7 @@ public class TimerPlugin extends CordovaPlugin {
 
         }
     }
-/*
+
     private static CordovaWebView webView = null;
 
     
@@ -43,7 +43,7 @@ public class TimerPlugin extends CordovaPlugin {
         TimerPlugin.webView = super.webView;
         Log.v(TAG, "init");
     }
-    
+    /*
     @Override
     public boolean execute (String action, JSONArray args,
                             CallbackContext command) throws JSONException {
@@ -66,7 +66,7 @@ public class TimerPlugin extends CordovaPlugin {
         return true;
         
     }
-    
+    */
     private int addInterval(int msInterval){
     	Log.v(TAG, "addInterval");
     	return TimerManager.addInterval(msInterval);
@@ -90,5 +90,5 @@ public class TimerPlugin extends CordovaPlugin {
         webView.loadUrl("javascript:" + js);
         
     }
-*/
+
 }

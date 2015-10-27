@@ -18,11 +18,11 @@ public class TimerPlugin extends CordovaPlugin {
     	
         if (action.equals("greet")) {
 
-            String name = data.getString(0);Log.v(TAG, name);
+            //String name = data.getString(0);Log.v(TAG, name);
         	
-            String message = "Hello, " + name;
-            callbackContext.success(message);
-
+            //String message = "Hello, " + name;
+            //callbackContext.success(message);
+            callbackContext.success(addTimeout(data.optInt(0)));
             return true;
 
         } else {

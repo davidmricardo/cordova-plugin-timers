@@ -18,7 +18,7 @@ public class Interval extends de.schchr.cordova.plugin.timers.Timer {
 		timer.schedule(new TimerTask() {
 			  @Override
 			  public void run() {
-				  TimerPlugin.triggerTimer(id);
+				  //TimerPlugin.triggerTimer(id);
 			  }
 		}, msInterval, msInterval);
 		

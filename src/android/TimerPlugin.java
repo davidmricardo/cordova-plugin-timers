@@ -10,7 +10,26 @@ import org.json.JSONException;
 import android.util.Log;
 
 public class TimerPlugin extends CordovaPlugin {
+	
 
+    @Override
+    public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
+
+        if (action.equals("greet")) {
+
+            String name = data.getString(0);
+            String message = "Hello, " + name;
+            callbackContext.success(message);
+
+            return true;
+
+        } else {
+            
+            return false;
+
+        }
+    }
+/*
     private static CordovaWebView webView = null;
 
     protected static final String TAG = "timers";
@@ -29,7 +48,7 @@ public class TimerPlugin extends CordovaPlugin {
 
         Log.v(TAG, "exec");
     	
-        /*try{
+        try{
         	
         	if (action.equals("addTimeout"))
                 command.success(addTimeout(args.optInt(0)));
@@ -40,7 +59,7 @@ public class TimerPlugin extends CordovaPlugin {
         	
         } catch (Exception e){
         	System.out.println(e);
-        }*/
+        }
 
         return true;
         
@@ -69,5 +88,5 @@ public class TimerPlugin extends CordovaPlugin {
         webView.loadUrl("javascript:" + js);
         
     }
-
+*/
 }

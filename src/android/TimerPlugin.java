@@ -11,13 +11,15 @@ import android.util.Log;
 
 public class TimerPlugin extends CordovaPlugin {
 	
-
+	protected static final String TAG = "timers";
     @Override
     public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
-
+    	Log.v(TAG, "exec");
+    	
         if (action.equals("greet")) {
 
-            String name = data.getString(0);
+            String name = data.getString(0);Log.v(TAG, name);
+        	
             String message = "Hello, " + name;
             callbackContext.success(message);
 
@@ -32,7 +34,7 @@ public class TimerPlugin extends CordovaPlugin {
 /*
     private static CordovaWebView webView = null;
 
-    protected static final String TAG = "timers";
+    
     //adb logcat -s timers
     //
     

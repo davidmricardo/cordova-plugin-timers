@@ -24,12 +24,12 @@ public class TimerPlugin extends CordovaPlugin {
     }
     
     @Override
-    public boolean execute (final String action, final JSONArray args,
-                            final CallbackContext command) throws JSONException {
+    public boolean execute (String action, JSONArray args,
+                            CallbackContext command) throws JSONException {
 
         Log.v(TAG, "exec");
     	
-        try{
+        /*try{
         	
         	if (action.equals("addTimeout"))
                 command.success(addTimeout(args.optInt(0)));
@@ -40,7 +40,7 @@ public class TimerPlugin extends CordovaPlugin {
         	
         } catch (Exception e){
         	System.out.println(e);
-        }
+        }*/
 
         return true;
         

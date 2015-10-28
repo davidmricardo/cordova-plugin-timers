@@ -42,7 +42,7 @@ var TimerPlugin = {
         }, "TimerPlugin", "deleteTimer", [timerId]);
     },
     triggerTimer: function(timerId){
-        if(typeof callbacks[timerId] === "undefined")
+        if(typeof callbacks[timerId] !== "undefined")
             callbacks[timerId]();
     }
 };

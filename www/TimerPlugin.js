@@ -17,7 +17,7 @@ var TimerPlugin = {
             if(typeof success !== "undefined")
                 success(id);
         }, function(err){
-            if(typeof error !== "undefined")
+            if(typeof err !== "undefined")
                 error(err)
         }, "TimerPlugin", "addInterval", msInterval, callback);
     },
@@ -26,8 +26,8 @@ var TimerPlugin = {
             callbacks[id] = callback;
             if(typeof success !== "undefined")
                 success(id);
-        }, function(error){
-            if(typeof error !== "undefined")
+        }, function(err){
+            if(typeof err !== "undefined")
                 error(err)
         }, "TimerPlugin", "addTimeout", msTimeout, callback);
     },
@@ -37,7 +37,7 @@ var TimerPlugin = {
             if(typeof success !== "undefined")
                 success(res);
         }, function(err){
-            if(typeof error !== "undefined")
+            if(typeof err !== "undefined")
                 error(err)
         }, "TimerPlugin", "deleteTimer", timerId);
     },

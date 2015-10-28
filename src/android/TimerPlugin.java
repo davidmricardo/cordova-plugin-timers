@@ -11,96 +11,73 @@ import android.app.Activity;
 import android.util.Log;
 
 public class TimerPlugin extends CordovaPlugin {
-	
+
 	protected static final String TAG = "timers";
+
 	protected static CordovaInterface cordovaInstance = null;
-    @Override
-    public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
-    	Log.v(TAG, "exec");
-    	
-        if (action.equals("greet")) {
+	private static CordovaWebView webView = null;
 
-            //String name = data.getString(0);Log.v(TAG, name);
-        	
-            //String message = "Hello, " + name;
-            //callbackContext.success(message);
-            callbackContext.success(addTimeout(data.optInt(0)));
-            return true;
+	// adb logcat -s timers
 
-        } else {
-            
-            return false;
+	@Override
+	public void initialize(CordovaInterface cordova, CordovaWebView webView) {
+		TimerPlugin.webView = super.webView;
+		TimerPlugin.cordovaInstance = super.cordova;
+		Log.v(TAG, "init");
+	}
 
-        }
-    }
+	@Override
+	public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
 
-    private static CordovaWebView webView = null;
+		Log.v(TAG, "execute(" + action + ")");
 
-    
-    //adb logcat -s timers
-    //
-    
-    @Override
-    public void initialize (CordovaInterface cordova, CordovaWebView webView) {
-        TimerPlugin.webView = super.webView;
-        TimerPlugin.cordovaInstance = super.cordova;
-        Log.v(TAG, "init");
-    }
-    /*
-    @Override
-    public boolean execute (String action, JSONArray args,
-                            CallbackContext command) throws JSONException {
+		if (action.equals("addTimeout"))
+			callbackContext.success(addTimeout(data.optInt(0)));
+		else if (action.equals("addInterval"))
+			callbackContext.success(addInterval(data.optInt(0)));
+		else if (action.equals("deleteTimer"))
+			callbackContext.success(deleteTimer(data.optInt(0)));
+		else
+			return false;
 
-        Log.v(TAG, "exec");
-    	
-        try{
-        	
-        	if (action.equals("addTimeout"))
-                command.success(addTimeout(args.optInt(0)));
-            else if (action.equals("addInterval"))
-                command.success(addInterval(args.optInt(0)));
-            else if (action.equals("deleteTimer"))
-                command.success(deleteTimer(args.optInt(0)));
-        	
-        } catch (Exception e){
-        	System.out.println(e);
-        }
+		return true;
 
-        return true;
-        
-    }
-    */
-    private int addInterval(int msInterval){
-    	Log.v(TAG, "addInterval");
-    	return TimerManager.addInterval(msInterval);
-    }
-    
-    private int addTimeout(int msTimeout){
-    	Log.v(TAG, "addTimeout");
-    	return TimerManager.addTimeout(msTimeout);
-    }
-    
-    private String deleteTimer(int timerId){
-    	Log.v(TAG, "deleteTimer");
-    	boolean result = TimerManager.deleteTimer(timerId);
-    	return result ? "true" : "false";
-    }
+	}
 
-    public static void triggerTimer (int timerId) {
-    	
-    	final int finalTimerId = timerId;
-    	
-    	Activity a = cordovaInstance.getActivity();
-    	a.runOnUiThread(new Runnable() {
-    	    public void run() { 
-    	    	String js = "cordova.plugins.TimerPlugin.triggerTimer(" + finalTimerId + ")";
+	private int addInterval(int msInterval) {
+		Log.v(TAG, "addInterval(" + msInterval + ")");
+		return TimerManager.addInterval(msInterval);
+	}
 
-    	        webView.loadUrl("javascript:" + js);
-    	    }
-    	});
+	private int addTimeout(int msTimeout) {
+		Log.v(TAG, "addTimeout(" + msTimeout + ")");
+		return TimerManager.addTimeout(msTimeout);
+	}
 
-        
-        
-    }
+	private String deleteTimer(int timerId) {
+
+		Log.v(TAG, "deleteTimer(" + timerId + ")");
+
+		boolean result = TimerManager.deleteTimer(timerId);
+		return result ? "true" : "false";
+
+	}
+
+	public static void triggerTimer(int timerId) {
+
+		final int finalTimerId = timerId;
+
+		Activity a = cordovaInstance.getActivity();
+
+		a.runOnUiThread(new Runnable() {
+
+			public void run() {
+				String js = "cordova.plugins.TimerPlugin.triggerTimer(" + finalTimerId + ")";
+				webView.loadUrl("javascript:" + js);
+			}
+
+		});
+
+	}
 
 }

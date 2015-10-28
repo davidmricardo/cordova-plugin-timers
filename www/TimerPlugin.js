@@ -10,11 +10,8 @@ var error = function(msg){
 
 var callbacks = {};
 
-var TimerPlugin =
-{greet: function (name, successCallback, errorCallback) {
-    cordova.exec(successCallback, errorCallback, "TimerPlugin", "greet", [name]);
-}};
-   /* addInterval: function(msInterval, callback, success, error){
+var TimerPlugin = {
+    addInterval: function(msInterval, callback, success, error){
         exec(function(id){
             callbacks[id] = callback;
             if(typeof success !== "undefined")
@@ -47,6 +44,6 @@ var TimerPlugin =
     triggerTimer: function(timerId){
         console.log("timer triggered: " + timerId);
     }
-};*/
+};
 
 module.exports = TimerPlugin;

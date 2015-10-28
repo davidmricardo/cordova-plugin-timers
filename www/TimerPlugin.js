@@ -1,11 +1,11 @@
 var exec = require('cordova/exec');
 
 var success = function(msg){
-    console.log("success:" + msg);
+    //console.log("success:" + msg);
 };
 
 var error = function(msg){
-    console.log("error:" + msg);
+    //console.log("error:" + msg);
 };
 
 var callbacks = {};
@@ -33,7 +33,7 @@ var TimerPlugin = {
     },
     deleteTimer: function(timerId){
         exec(function(res){
-            delete callbacks[id];
+            delete callbacks[timerId];
             if(typeof success !== "undefined")
                 success(res);
         }, function(err){
@@ -42,7 +42,8 @@ var TimerPlugin = {
         }, "TimerPlugin", "deleteTimer", [timerId]);
     },
     triggerTimer: function(timerId){
-        console.log("timer triggered: " + timerId);
+        if(typeof callbacks[timerId] === "undefined")
+            callbacks[timerId]();
     }
 };
 

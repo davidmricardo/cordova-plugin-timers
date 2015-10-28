@@ -7,11 +7,13 @@ import org.apache.cordova.CordovaWebView;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import android.app.Activity;
 import android.util.Log;
 
 public class TimerPlugin extends CordovaPlugin {
 	
 	protected static final String TAG = "timers";
+	protected static CordovaInterface cordovaInstance = null;
     @Override
     public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
     	Log.v(TAG, "exec");
@@ -41,6 +43,7 @@ public class TimerPlugin extends CordovaPlugin {
     @Override
     public void initialize (CordovaInterface cordova, CordovaWebView webView) {
         TimerPlugin.webView = super.webView;
+        TimerPlugin.cordovaInstance = super.cordova;
         Log.v(TAG, "init");
     }
     /*
@@ -84,10 +87,17 @@ public class TimerPlugin extends CordovaPlugin {
     }
 
     public static void triggerTimer (int timerId) {
+    	
+    	Activity a = cordovaInstance.getActivity();
+    	a.runOnUiThread(new Runnable() {
+    	    public void run() { 
+    	    	String js = "cordova.plugins.TimerPlugin.triggerTimer(" + timerId + ")";
 
-        String js = "cordova.plugins.TimerPlugin.triggerTimer(" + timerId + ")";
+    	        webView.loadUrl("javascript:" + js);
+    	    }
+    	});
 
-        webView.loadUrl("javascript:" + js);
+        
         
     }
 

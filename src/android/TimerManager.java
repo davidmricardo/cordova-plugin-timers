@@ -1,6 +1,8 @@
 package de.schchr.cordova.plugin.timers;
 
+import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.Map.Entry;
 
 public class TimerManager {
 	
@@ -19,6 +21,15 @@ public class TimerManager {
 	
 	public Hashtable<Integer, Timer> getTimers(){
 		return timers;
+	}
+	
+	public static void checkTimers(){
+		
+		for(Entry<Integer, Timer> entry : instance.getTimers().entrySet()) {
+		    Timer timer = entry.getValue();
+		    timer.check();
+		}
+		
 	}
 	
 	public static int addInterval(int msInterval) {

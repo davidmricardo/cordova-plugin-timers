@@ -17,5 +17,9 @@ public class Timer {
 	public void delete(){
 		
 	};
+	
+	public void check(){
+		
+	};
 
 }

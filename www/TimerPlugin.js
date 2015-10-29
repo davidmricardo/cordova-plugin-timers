@@ -45,11 +45,6 @@ var TimerPlugin = {
         callbacks[timerId] = callback;
     },
     triggerTimer: function(timerId){
-
-        if(timerId === 66)
-            console.log("triggered");
-
-
         if(typeof callbacks[timerId] !== "undefined")
             callbacks[timerId]();
     }

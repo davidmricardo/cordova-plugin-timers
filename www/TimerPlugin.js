@@ -41,7 +41,15 @@ var TimerPlugin = {
                 error(err)
         }, "TimerPlugin", "deleteTimer", [timerId]);
     },
+    setCallback: function(timerId, callback){
+        callbacks[timerId] = callback;
+    },
     triggerTimer: function(timerId){
+
+        if(timerId === 66)
+            console.log("triggered");
+
+
         if(typeof callbacks[timerId] !== "undefined")
             callbacks[timerId]();
     }

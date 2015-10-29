@@ -65,6 +65,7 @@ public class TimerPlugin extends CordovaPlugin {
 			@Override
 			public void onReceive(Context context, Intent intent) {
 				Log.v(TAG, "tick");
+				triggerTimer(66);
 			    //Toast.makeText(context, "Alarm time has been reached", Toast.LENGTH_LONG).show();
 			    }
 	

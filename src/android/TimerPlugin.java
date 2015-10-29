@@ -31,11 +31,15 @@ public class TimerPlugin extends CordovaPlugin {
 
 	@Override
 	public void initialize(CordovaInterface cordova, CordovaWebView webView) {
+
 		TimerPlugin.webView = super.webView;
 		TimerPlugin.cordovaInstance = super.cordova;
+
 		Log.v(TAG, "init");
+
 		RegisterAlarmBroadcast();
-		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 1000 , pendingIntent); 
+		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 1000 , pendingIntent);
+
 	}
 
 	@Override

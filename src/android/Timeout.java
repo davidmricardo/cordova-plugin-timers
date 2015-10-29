@@ -1,4 +1,5 @@
 package de.schchr.cordova.plugin.timers;
+
 import java.util.Timer;
 import java.util.TimerTask;
 

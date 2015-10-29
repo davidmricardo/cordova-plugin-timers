@@ -9,8 +9,10 @@ public class TimerManager {
 	private static TimerManager instance = null;
 	
 	static {
+
 		if(instance == null)
 			instance = new TimerManager();
+
     }
 	
 	private Hashtable<Integer, Timer> timers;

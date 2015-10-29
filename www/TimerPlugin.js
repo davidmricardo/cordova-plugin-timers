@@ -1,51 +1,51 @@
 var exec = require('cordova/exec');
 
-var success = function(msg){
+var success = function (msg) {
     //console.log("success:" + msg);
 };
 
-var error = function(msg){
+var error = function (msg) {
     //console.log("error:" + msg);
 };
 
 var callbacks = {};
 
 var TimerPlugin = {
-    addInterval: function(msInterval, callback, success, error){
-        exec(function(id){
+    addInterval: function (msInterval, callback, success, error) {
+        exec(function (id) {
             callbacks[id] = callback;
-            if(typeof success !== "undefined")
+            if (typeof success !== "undefined")
                 success(id);
-        }, function(err){
-            if(typeof err !== "undefined")
+        }, function (err) {
+            if (typeof err !== "undefined")
                 error(err)
         }, "TimerPlugin", "addInterval", [msInterval]);
     },
-    addTimeout: function(msTimeout, callback){
-        exec(function(id){
+    addTimeout: function (msTimeout, callback) {
+        exec(function (id) {
             callbacks[id] = callback;
-            if(typeof success !== "undefined")
+            if (typeof success !== "undefined")
                 success(id);
-        }, function(err){
-            if(typeof err !== "undefined")
+        }, function (err) {
+            if (typeof err !== "undefined")
                 error(err)
         }, "TimerPlugin", "addTimeout", [msTimeout]);
     },
-    deleteTimer: function(timerId){
-        exec(function(res){
+    deleteTimer: function (timerId) {
+        exec(function (res) {
             delete callbacks[timerId];
-            if(typeof success !== "undefined")
+            if (typeof success !== "undefined")
                 success(res);
-        }, function(err){
-            if(typeof err !== "undefined")
+        }, function (err) {
+            if (typeof err !== "undefined")
                 error(err)
         }, "TimerPlugin", "deleteTimer", [timerId]);
     },
-    setCallback: function(timerId, callback){
+    setCallback: function (timerId, callback) {
         callbacks[timerId] = callback;
     },
-    triggerTimer: function(timerId){
-        if(typeof callbacks[timerId] !== "undefined")
+    triggerTimer: function (timerId) {
+        if (typeof callbacks[timerId] !== "undefined")
             callbacks[timerId]();
     }
 };

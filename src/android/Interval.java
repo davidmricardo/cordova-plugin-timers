@@ -18,10 +18,12 @@ public class Interval extends de.schchr.cordova.plugin.timers.Timer {
 		currentTime = msInterval / 1000;
 		
 		timer.schedule(new TimerTask() {
+
 			  @Override
 			  public void run() {
 				  TimerPlugin.triggerTimer(id);
 			  }
+
 		}, msInterval, msInterval);
 		
 	}

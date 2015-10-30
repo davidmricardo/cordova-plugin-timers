@@ -33,7 +33,7 @@ public class Interval extends de.schchr.cordova.plugin.timers.Timer {
 	}
 	
 	@Override
-	public void check(){
+	public synchronized void check(){
 		
 		currentTime--;
 		

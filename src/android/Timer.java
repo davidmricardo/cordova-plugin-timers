@@ -17,7 +17,7 @@ public class Timer {
 		
 	};
 	
-	public void check(){
+	public synchronized void check(){
 		
 	};
 

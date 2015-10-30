@@ -25,7 +25,7 @@ public class TimerManager {
 		return timers;
 	}
 	
-	public static void checkTimers(){
+	public synchronized static void checkTimers(){
 		
 		for(Entry<Integer, Timer> entry : instance.getTimers().entrySet()) {
 		    Timer timer = entry.getValue();

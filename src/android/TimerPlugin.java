@@ -1,5 +1,7 @@
 package de.schchr.cordova.plugin.timers;
 
+import java.util.Hashtable;
+
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaPlugin;
@@ -23,23 +25,23 @@ public class TimerPlugin extends CordovaPlugin {
 	protected static CordovaInterface cordovaInstance = null;
 	private static CordovaWebView webView = null;
 	
-	AlarmManager alarmManager;
-    PendingIntent pendingIntent;
-    BroadcastReceiver mReceiver;
+	private int timerCount = 0;
+	
+	private Hashtable<Integer, PendingIntent> timerIntents;
+	
+	AlarmManager alarmManager = null;
 
 	// adb logcat -s timers
 
 	@Override
 	public void initialize(CordovaInterface cordova, CordovaWebView webView) {
-
+		
 		TimerPlugin.webView = super.webView;
 		TimerPlugin.cordovaInstance = super.cordova;
-
+		
+		timerIntents = new Hashtable<Integer, PendingIntent>();
 		Log.v(TAG, "init");
-
-		RegisterAlarmBroadcast();
-		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 1000 , pendingIntent);
-
+		
 	}
 
 	@Override
@@ -60,48 +62,72 @@ public class TimerPlugin extends CordovaPlugin {
 
 	}
 	
- 	private void RegisterAlarmBroadcast() {
+ 	private int addTimer(int time, boolean isInterval) {
  		
-		mReceiver = new BroadcastReceiver() {
+ 		final int timerId = timerCount;
+ 		
+		BroadcastReceiver mReceiver = new BroadcastReceiver() {
 			    
 			@Override
 			public void onReceive(Context context, Intent intent) {
-				Log.v(TAG, "check timers");
-				TimerManager.checkTimers();
+				triggerTimer(timerId);
 		    }
 	
 		};
 		
 		Activity a = cordovaInstance.getActivity();
-		a.registerReceiver(mReceiver, new IntentFilter("CORDOVA_PLUGIN_TIMER"));
 		
-		pendingIntent = PendingIntent.getBroadcast(a, 0, new Intent("CORDOVA_PLUGIN_TIMER"), 0);
-	    alarmManager = (AlarmManager)(a.getSystemService(Context.ALARM_SERVICE));
+		if(alarmManager == null)
+			alarmManager = (AlarmManager)(a.getSystemService(Context.ALARM_SERVICE));
+		
+		a.registerReceiver(mReceiver, new IntentFilter("CORDOVA_PLUGIN_TIMER_" + timerId));
+		
+		PendingIntent pendingIntent = PendingIntent.getBroadcast(a, 0, new Intent("CORDOVA_PLUGIN_TIMER_" + timerId), 0);
+    	
+		if(isInterval)
+			alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), time , pendingIntent);
+		else
+			alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + time, pendingIntent);
+		
+		timerIntents.put(timerId, pendingIntent);
+		
+		timerCount++;
+		
+		Log.v(TAG, "createdTimer with id " + timerId);
+		
+		return timerId;
 		    
 	}
 
 	private int addInterval(int msInterval) {
 		Log.v(TAG, "addInterval(" + msInterval + ")");
-		return TimerManager.addInterval(msInterval);
+		return addTimer(msInterval, true);
 	}
 
 	private int addTimeout(int msTimeout) {
 		Log.v(TAG, "addTimeout(" + msTimeout + ")");
-		return TimerManager.addTimeout(msTimeout);
+		return addTimer(msTimeout, false);
 	}
 
 	private String deleteTimer(int timerId) {
 
 		Log.v(TAG, "deleteTimer(" + timerId + ")");
 
-		boolean result = TimerManager.deleteTimer(timerId);
-		return result ? "true" : "false";
+		PendingIntent pendingIntent = timerIntents.get(timerId);
+		
+		if(pendingIntent != null){
+			alarmManager.cancel(pendingIntent);
+			return "true";
+		} else
+			return "false";
 
 	}
 
 	public static void triggerTimer(int timerId) {
 
 		final int finalTimerId = timerId;
+	
+		Log.v(TAG, "trigger timer with id " + finalTimerId);
 
 		Activity a = cordovaInstance.getActivity();
 

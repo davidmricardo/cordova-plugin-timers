@@ -1,5 +1,5 @@
 /**
- * Created by christian.schneider on 28.10.2015.
+ * Ionic service wrapper for the TimerPlugin
  */
 app.service("TimerPlugin", function(){
 

@@ -17,3 +17,7 @@ removes a specific timer
 
 ###setCallback(timerId, callback)
 sets a callback for a speicific timer
+
+##logging
+Use logcat to log the plugin actions:
+'adb logcat -s timers'

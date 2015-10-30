@@ -3,7 +3,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
         xmlns:android="http://schemas.android.com/apk/res/android"
         id="de.schchr.cordova.plugin.timers"
-        version="0.1">
+        version="0.2">
 
     <name>Timers</name>
 
@@ -35,22 +35,6 @@
 
         <source-file
                 src="src/android/TimerPlugin.java"
-                target-dir="src/de/schchr/cordova/plugin/timers" />
-
-        <source-file
-                src="src/android/Timer.java"
-                target-dir="src/de/schchr/cordova/plugin/timers" />
-
-        <source-file
-                src="src/android/Timeout.java"
-                target-dir="src/de/schchr/cordova/plugin/timers" />
-
-        <source-file
-                src="src/android/Interval.java"
-                target-dir="src/de/schchr/cordova/plugin/timers" />
-
-        <source-file
-                src="src/android/TimerManager.java"
                 target-dir="src/de/schchr/cordova/plugin/timers" />
 
         <config-file target="res/xml/config.xml" parent="/*">

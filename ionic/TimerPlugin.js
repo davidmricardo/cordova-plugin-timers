@@ -1,5 +1,6 @@
 /**
  * Ionic service wrapper for the TimerPlugin
+ * url: https://github.com/schchr/cordova-plugin-timers.git
  */
 app.service("TimerPlugin", function(){
 

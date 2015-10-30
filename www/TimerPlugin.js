@@ -11,7 +11,7 @@ var error = function (msg) {
 var callbacks = {};
 
 var TimerPlugin = {
-    addInterval: function (msInterval, callback, success, error) {
+    addInterval: function (callback, msInterval, success, error) {
         exec(function (id) {
             callbacks[id] = callback;
             if (typeof success !== "undefined")
@@ -21,7 +21,7 @@ var TimerPlugin = {
                 error(err)
         }, "TimerPlugin", "addInterval", [msInterval]);
     },
-    addTimeout: function (msTimeout, callback) {
+    addTimeout: function (callback, msTimeout, success, error) {
         exec(function (id) {
             callbacks[id] = callback;
             if (typeof success !== "undefined")
@@ -31,7 +31,7 @@ var TimerPlugin = {
                 error(err)
         }, "TimerPlugin", "addTimeout", [msTimeout]);
     },
-    deleteTimer: function (timerId) {
+    deleteTimer: function (timerId, success, error) {
         exec(function (res) {
             delete callbacks[timerId];
             if (typeof success !== "undefined")

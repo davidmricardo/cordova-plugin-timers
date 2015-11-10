@@ -2,7 +2,7 @@ This plugin allows you to create timers in cordova that work in idle mode!
 
 #API
 
-##cordova.plugin.TimerPlugin
+##cordova.plugins.TimerPlugin
 
 ###addInterval(callback, msInterval, success, error)
 works like setInterval(callback, msInterval)

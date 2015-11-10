@@ -2,7 +2,7 @@
  * Ionic service wrapper for the TimerPlugin
  * url: https://github.com/schchr/cordova-plugin-timers.git
  */
-app.service("Timers", function(){
+app.service("Timers", function($q){
 
     var self = this;
 
@@ -20,22 +20,39 @@ app.service("Timers", function(){
 
     var notUsable = function(){
         console.log("TimerPlugin not loaded");
+        return $q.reject();
     };
 
     this.timeout = function(callback, duration){
 
-        if(canBeUsed)
-            return cordova.plugins.TimerPlugin.addTimeout(callback, duration);
-        else
+        if(canBeUsed){
+
+            var defer = $q.defer();
+
+            cordova.plugins.TimerPlugin.addTimeout(callback, duration, function(id){
+                defer.resolve(id);
+            });
+
+            return defer.promise;
+
+        } else
             notUsable();
 
     };
 
     this.interval = function(callback, duration){
 
-        if(canBeUsed)
-            return cordova.plugins.TimerPlugin.addInterval(callback, duration);
-        else
+        if(canBeUsed){
+
+            var defer = $q.defer();
+
+            cordova.plugins.TimerPlugin.addInterval(callback, duration, function(id){
+                defer.resolve(id);
+            });
+
+            return defer.promise;
+
+        } else
             notUsable();
 
     };

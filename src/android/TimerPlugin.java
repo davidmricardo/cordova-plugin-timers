@@ -117,6 +117,7 @@ public class TimerPlugin extends CordovaPlugin {
 		
 		if(pendingIntent != null){
 			alarmManager.cancel(pendingIntent);
+			timerIntents.remove(timerId);
 			return "true";
 		} else
 			return "false";

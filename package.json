@@ -1,0 +1,31 @@
+{
+  "name": "de.schchr.cordova.plugin.timers",
+  "version": "0.0.2",
+  "description": "This plugin allows you to create timers in cordova that work in idle mode!",
+  "cordova": {
+    "id": "de.schchr.cordova.plugin.timers",
+    "platforms": [
+      "android"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidmricardo/cordova-plugin-timers.git"
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.6.0"
+    }
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/davidmricardo/cordova-plugin-timers/issues"
+  },
+  "homepage": "https://github.com/davidmricardo/cordova-plugin-timers#readme"
+}
